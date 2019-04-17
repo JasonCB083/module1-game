@@ -16,7 +16,7 @@ function Player(canvas) {
 
 Player.prototype.draw = function () {
   this.ctx.fillStyle = 'blue';
-  this.ctx.fillRect(this.x - this.size/2, this.y - this.size/2, this.size, this.size)
+  
   this.ctx.drawImage(this.img,this.x - this.size/2, this.y-this.size/2, this.size, this.size );
 }
 

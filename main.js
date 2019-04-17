@@ -44,7 +44,8 @@ function main() {
 //////////////////////////////////////////////////////////
 
   function buildGameScreen() {
-    // splashMusic.play();
+
+    
     const gameScreen = buildDom(`
       <section class="game-container">
         <canvas></canvas>
@@ -93,7 +94,17 @@ function main() {
     const gameOverScreen = buildDom(`
       <section>
         <h1>Game Over</h1>
+        <div class="img-container"> 
+          <img src="img/19178-A-417x450.png" class="game-over" >
+          </img>
+        </div>
+        
         <button class="restart-button">Restart</button>
+
+        <audio autoplay>
+        <source src="./Top-Gear.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+        </audio>
       </section>
   
       `)

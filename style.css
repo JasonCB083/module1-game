@@ -126,3 +126,16 @@ canvas {
 .img-container {
   margin-bottom: 50px;
 }
+
+.restart-button {
+  font-size: 30px;
+  border-radius: 14px;
+  background-color: bisque;
+  font-family:'Dokdo', cursive, Helvetica, Arial, sans-serif;
+}
+
+
+.game-over {
+  width: 309px;
+  margin-top: -38px;
+}
