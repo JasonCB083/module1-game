@@ -48,10 +48,12 @@ function main() {
     
     const gameScreen = buildDom(`
       <section class="game-container">
+        <p class= "points">0</p>
         <canvas></canvas>
       </section>
     `);
     const gameContainerElement = document.querySelector('.game-container')
+    const pointsElement = document.querySelector(".points")
     const width = gameContainerElement.offsetWidth;
     const height = gameContainerElement.offsetHeight;
 
@@ -62,40 +64,52 @@ function main() {
     const game = new Game(canvasElement);
     game.setGameOverCallBack(buildGameOverScreen);
     game.startLoop();
-        document.addEventListener('keydown', function(event) {
-          if (event.keyCode === 38) {
-            game.player.setDirectionY(-1)
-          }
-          if (event.keyCode === 40) {
-            game.player.setDirectionY(1)
-          } 
-          if (event.keyCode === 37) {
-            game.player.setDirectionX(-1)
-              game.player.img.src = './img/mailman-left.png'
-          }
-          if (event.keyCode === 39) {
-            game.player.setDirectionX(1)
-            game.player.img.src = './img/mailman-right.png'
-          } 
-        })
-        document.addEventListener('keyup', function(event) {
-          if(event.keyCode === 37 || event.keyCode === 39) {
-            game.player.setDirectionX(0);
-          } else if(event.keyCode === 38 || event.keyCode === 40){
-            game.player.setDirectionY(0);
-          }
+    game.setUpdateMarkersCallBack(updateMarkers);
+
+
+    
+    document.addEventListener('keydown', function(event) {
+      if (event.keyCode === 38) {
+        game.player.setDirectionY(-1)
+      }
+      if (event.keyCode === 40) {
+        game.player.setDirectionY(1)
+      } 
+      if (event.keyCode === 37) {
+        game.player.setDirectionX(-1)
+        game.player.img.src = './img/mailman-left.png'
+      }
+      if (event.keyCode === 39) {
+        game.player.setDirectionX(1)
+        game.player.img.src = './img/mailman-right.png'
+      } 
     })
+    document.addEventListener('keyup', function(event) {
+      if(event.keyCode === 37 || event.keyCode === 39) {
+        game.player.setDirectionX(0);
+      } else if(event.keyCode === 38 || event.keyCode === 40){
+        game.player.setDirectionY(0);
+      }
+      
+      
+      
+    })
+    function updateMarkers(points) {
+    pointsElement.innerHTML = points;
+  
+    }
     
   }
-
-
-  function buildGameOverScreen() {
-
+  
+  
+  function buildGameOverScreen(score) {
+    
     const gameOverScreen = buildDom(`
       <section>
         <h1>Game Over</h1>
         <div class="img-container"> 
           <img src="img/19178-A-417x450.png" class="game-over" >
+          <p>SCORE => ${score}</p>
           </img>
         </div>
         

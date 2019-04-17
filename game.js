@@ -7,7 +7,9 @@ function Game(canvas) {
   this.canvas = canvas;
   this.ctx = this.canvas.getContext('2d');
   this.gameOver = false;
-  
+  this.score = 0;
+  this.updateMarkers = null;
+  this.barkFx = new Audio('Top-Gear.mp3');
 };
 
 Game.prototype.startLoop = function() {
@@ -54,14 +56,22 @@ Game.prototype.checkCollisions = function(){
     const isColliding = this.player.checkCollisionWithHouse(house);
     if (isColliding) {
       this.houses.splice(index,1);
+      this.score += 100;
+      
+      this.updateMarkers(this.score);
+      // console.log(this.score, "this works");
+
     }
+    
   });
 
 
   const isColliding = this.player.checkCollisionWithDog(this.dog);
   if (isColliding) {
         this.gameOver = true;
-        this.constructorGameOverCallback();
+        this.barkFx.currentTime = 0;
+        this.barkFx.play();
+        this.constructorGameOverCallback(this.score);
 
   }
   
@@ -71,3 +81,6 @@ Game.prototype.setGameOverCallBack = function(buildGameOverScreen) {
   this.constructorGameOverCallback = buildGameOverScreen;
 }
 
+Game.prototype.setUpdateMarkersCallBack = function(callback) {
+  this.updateMarkers = callback;
+}
