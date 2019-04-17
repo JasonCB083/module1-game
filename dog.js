@@ -10,7 +10,7 @@ function Dog(canvas) {
   this.ctx = this.canvas.getContext('2d');
   this.img = new Image();
   this.img.src = "./img/doggy-left.png";
-  this.speed = 0.1;
+  this.speed = 2;
   this.velocityX = 0;
   this.velocityY = 0;
 }
@@ -23,11 +23,10 @@ Dog.prototype.draw = function() {
 
 Dog.prototype.update = function(playerX, playerY) {
   
-  
   const vectorX = playerX - this.x;
   const vectorY = playerY - this.y;
 
-  const vectorModule = Math.floor(Math.sqrt(vectorX^2 + vectorY^2));
+  const vectorModule = Math.sqrt(vectorX**2 + vectorY**2);
   // if (vectorModule === 0) {
   //   vectorModule =1
   // }
