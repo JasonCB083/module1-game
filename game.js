@@ -9,13 +9,13 @@ function Game(canvas) {
   this.gameOver = false;
   this.score = 0;
   this.updateMarkers = null;
-  this.barkFx = new Audio('Top-Gear.mp3');
+  // this.barkFx = new Audio('music/dogsOut.mov');
 };
 
 Game.prototype.startLoop = function() {
   this.player = new Player(this.canvas);
-  this.dog = new Dog(this.canvas);
-
+  // this.dog = new Dog(this.canvas);
+  this.dogs = [];
 
   const loop = () => {
     if (Math.random() > 0.97) {
@@ -23,10 +23,20 @@ Game.prototype.startLoop = function() {
         this.houses.push(new House(this.canvas))
       }
     }
+    if (this.dogs.length < 3) {
+      if (Math.random() > 0.97) {
+        const x = Math.random() * this.canvas.width;
+        const y = Math.random() * this.canvas.height;
+        this.dogs.push(new Dog(this.canvas, x, y))
+      }
+    }
+
+
     this.clearCanvas();
     this.drawAll();
     this.updateAll();
     this.checkCollisions();
+    
     if(!this.gameOver){
       window.requestAnimationFrame(loop);
     }
@@ -36,7 +46,9 @@ Game.prototype.startLoop = function() {
 
 Game.prototype.drawAll = function() {
   this.player.draw();
-  this.dog.draw();
+  this.dogs.forEach((dog)=> {
+    dog.draw();
+  }); 
   this.houses.forEach((house) => {
     house.draw();
   });
@@ -44,7 +56,9 @@ Game.prototype.drawAll = function() {
 
 Game.prototype.updateAll = function() {
   this.player.update();
-  this.dog.update(this.player.x, this.player.y);
+  this.dogs.forEach((dog) => {
+    dog.update(this.player.x, this.player.y);
+  })
 }
 
 Game.prototype.clearCanvas = function() {
@@ -60,20 +74,19 @@ Game.prototype.checkCollisions = function(){
       
       this.updateMarkers(this.score);
       // console.log(this.score, "this works");
-
     }
-    
   });
 
-
-  const isColliding = this.player.checkCollisionWithDog(this.dog);
-  if (isColliding) {
-        this.gameOver = true;
-        this.barkFx.currentTime = 0;
-        this.barkFx.play();
-        this.constructorGameOverCallback(this.score);
-
-  }
+  this.dogs.forEach((dog) => {
+    const isColliding = this.player.checkCollisionWithDog(dog);
+    if (isColliding) {
+      this.gameOver = true;
+      // this.barkFx.currentTime = 0;
+      // this.barkFx.play();
+      this.constructorGameOverCallback(this.score);
+  
+    }
+  });
   
 }
 
@@ -84,3 +97,4 @@ Game.prototype.setGameOverCallBack = function(buildGameOverScreen) {
 Game.prototype.setUpdateMarkersCallBack = function(callback) {
   this.updateMarkers = callback;
 }
+

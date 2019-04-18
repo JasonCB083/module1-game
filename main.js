@@ -1,7 +1,7 @@
 'use strict';
 
 function main() {
-  //let splashMusic = new Audio("./Top-Gear.mp3");
+  
 
   const mainElement = document.querySelector('main');
 
@@ -27,13 +27,16 @@ function main() {
           <img src="img/chase.gif" class="splashImage" >
           </img>
         </div>
-        <audio autoplay>
-        <source src="./Top-Gear.mp3" type="audio/mp3">
-        Your browser does not support the audio tag.
-        </audio>
         <button class="start-button">Start</button>
+        
       </section>
-    `);
+  `);
+
+        // <audio autoplay>
+        // <source src="./Top-Gear.mp3" type="audio/mp3">
+        // Your browser does not support the audio tag.
+        // </audio>
+        
 
     const startButton = document.querySelector('.start-button');
     // const song = document.querySelector('audio');
@@ -44,14 +47,22 @@ function main() {
 //////////////////////////////////////////////////////////
 
   function buildGameScreen() {
-
+    // let splashMusic = new Audio("music/dogsOut.mov");
+    // var audioGame = new Audio('music/dogsOut.mov');
+    // audioGame.play();
+    // audioGame.pause();
     
+    // audio.currentTime = 5;
+
     const gameScreen = buildDom(`
       <section class="game-container">
-        <p class= "points">0</p>
+      
+        <p class= "points">Points for Mail Drops</p>
         <canvas></canvas>
+        <audio src='music/dogsOut.mov' controls autoplay loop>
       </section>
     `);
+    
     const gameContainerElement = document.querySelector('.game-container')
     const pointsElement = document.querySelector(".points")
     const width = gameContainerElement.offsetWidth;
@@ -77,11 +88,11 @@ function main() {
       } 
       if (event.keyCode === 37) {
         game.player.setDirectionX(-1)
-        game.player.img.src = './img/mailman-left.png'
+        game.player.img.src = 'img/mailman-left copy.png'
       }
       if (event.keyCode === 39) {
         game.player.setDirectionX(1)
-        game.player.img.src = './img/mailman-right.png'
+        game.player.img.src = 'img/mailman-right copy.png'
       } 
     })
     document.addEventListener('keyup', function(event) {
@@ -103,25 +114,26 @@ function main() {
   
   
   function buildGameOverScreen(score) {
+
+    
     
     const gameOverScreen = buildDom(`
       <section>
-        <h1>Game Over</h1>
+        <h1 class='keyFrameGameOver'>Game Over</h1>
         <div class="img-container"> 
           <img src="img/19178-A-417x450.png" class="game-over" >
-          <p>SCORE => ${score}</p>
+          
+          <p class= "end-game-score">SCORE => ${score}</p>
           </img>
         </div>
         
         <button class="restart-button">Restart</button>
+        <audio src='music/gameoverM.mov' controls autoplay loop>
 
-        <audio autoplay>
-        <source src="./Top-Gear.mp3" type="audio/mp3">
-        Your browser does not support the audio tag.
-        </audio>
       </section>
-  
-      `)
+    `)
+        
+        
 
       const restartButton = document.querySelector('.restart-button');
 

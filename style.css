@@ -10,6 +10,11 @@ html {
 body {
   margin: 0;
   padding: 0;
+  
+}
+
+body.game-container {
+  background-color: black;
 }
 
 
@@ -117,8 +122,8 @@ canvas {
 }
 
 .start-button {
-  font-size: 30px;
-  border-radius: 14px;
+  font-size: 35px;
+  border-radius: 23px;
   background-color: bisque;
   font-family:'Dokdo', cursive, Helvetica, Arial, sans-serif;
 }
@@ -138,4 +143,39 @@ canvas {
 .game-over {
   width: 309px;
   margin-top: -38px;
+}
+
+.points {
+  font-size: 30px;
+  margin-top: -10px;
+}
+
+.end-game-score {
+  font-size: 40px;
+}
+
+audio {
+  display: none;
+ }
+
+.keyFrameGameOver {
+animation-name: h1Animation;
+animation-duration: 4s;
+animation-iteration-count: infinite;
+}
+
+
+
+
+@keyframes h1Animation {
+0%, 100% {
+    opacity: 0.5;
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+}
+50% {
+    opacity: 1;
+    transform: scale(1.4);
+    -webkit-transform: scale(1.4);
+}
 }
