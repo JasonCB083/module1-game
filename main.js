@@ -10,18 +10,15 @@ function main() {
     return mainElement;
   }
   function buildSplashScreen() {
-
     // splashMusic.src = "Top-Gear.mp3"
     //setTimeout(splashMusic.play(),2000);
-    
     // const playPromise = splashMusic.play();
     // if (playPromise !== null){
     // playPromise.catch(() => { splashMusic.play(); })
     // } 
-
     const splashScreen = buildDom(`
       <section>
-        <h1>Mail Man</h1>
+        <h1 class='keyFrameGameOver'>Mail Man</h1>
         
         <div class="img-container"> 
           <img src="img/chase.gif" class="splashImage" >
@@ -31,21 +28,12 @@ function main() {
         
       </section>
   `);
-
-        // <audio autoplay>
-        // <source src="./Top-Gear.mp3" type="audio/mp3">
-        // Your browser does not support the audio tag.
-        // </audio>
-        
-
     const startButton = document.querySelector('.start-button');
-    // const song = document.querySelector('audio');
+    // const song = document.qnewgradient1.jpeguerySelector('audio');
     // song.play();
-
     startButton.addEventListener('click', buildGameScreen);
   }
 //////////////////////////////////////////////////////////
-
   function buildGameScreen() {
     // let splashMusic = new Audio("music/dogsOut.mov");
     // var audioGame = new Audio('music/dogsOut.mov');
@@ -53,16 +41,13 @@ function main() {
     // audioGame.pause();
     
     // audio.currentTime = 5;
-
     const gameScreen = buildDom(`
       <section class="game-container">
-      
         <p class= "points">Points for Mail Drops</p>
         <canvas></canvas>
         <audio src='music/dogsOut.mov' controls autoplay loop>
       </section>
     `);
-    
     const gameContainerElement = document.querySelector('.game-container')
     const pointsElement = document.querySelector(".points")
     const width = gameContainerElement.offsetWidth;
